@@ -38,8 +38,8 @@
             android:layout_height="wrap_content"
             android:text="باھا يېزىڭ"
             />
-        <ListView
-            android:id="@+id/listView"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:visibility="invisible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

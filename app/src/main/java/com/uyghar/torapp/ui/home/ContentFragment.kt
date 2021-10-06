@@ -19,6 +19,8 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.GsonBuilder
 import com.uyghar.torapp.databinding.DialogLayoutBinding
 import com.uyghar.torapp.model.Comment
@@ -48,6 +50,7 @@ class ContentFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentContentBinding.inflate(inflater, container, false)
+
         binding.buttonComment.setOnClickListener {
             val dialog = Dialog(requireContext())
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -149,9 +152,10 @@ class ContentFragment : Fragment() {
                     val gson = GsonBuilder().create()
                     val comments = gson.fromJson(json_str, Array<Comment>::class.java)
                     activity?.runOnUiThread {
-                        binding.listView.adapter = CommentAdapter(requireContext(), comments)
-                        binding.listView.visibility = View.VISIBLE
-                        binding.listView.requestLayout()
+                        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(),1)
+                        binding.recyclerView.adapter = CommentAdapter(comments)
+                        binding.recyclerView.visibility = View.VISIBLE
+
                     }
                 }
 
